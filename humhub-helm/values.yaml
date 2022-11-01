@@ -62,20 +62,6 @@ diagnosticMode:
 
 ## @section humhub Parameters
 ##
-
-## %%MAIN_CONTAINER/POD_DESCRIPTION%%
-##
-
-## Bitnami %%MAIN_CONTAINER%% image
-## ref: https://hub.docker.com/r/bitnami/%%IMAGE_NAME%%/tags/
-## @param %%MAIN_OBJECT_BLOCK%%.image.registry %%MAIN_CONTAINER%% image registry
-## @param %%MAIN_OBJECT_BLOCK%%.image.repository %%MAIN_CONTAINER%% image repository
-## @param %%MAIN_OBJECT_BLOCK%%.image.tag %%MAIN_CONTAINER%% image tag (immutable tags are recommended)
-## @param %%MAIN_OBJECT_BLOCK%%.image.digest %%MAIN_CONTAINER%% image digest in the way sha256:aa.... Please note this parameter, if set, will override the tag image tag (immutable tags are recommended)
-## @param %%MAIN_OBJECT_BLOCK%%.image.pullPolicy %%MAIN_CONTAINER%% image pull policy
-## @param %%MAIN_OBJECT_BLOCK%%.image.pullSecrets %%MAIN_CONTAINER%% image pull secrets
-## @param %%MAIN_OBJECT_BLOCK%%.image.debug Enable %%MAIN_CONTAINER%% image debug mode
-##
 image:
   registry: docker.io
   repository: mriedmann/humhub
@@ -108,42 +94,46 @@ adminEmail: admin@example.com
 adminPassword: ""
 humhubInstanceName: humhub
 
-
+# Database
 externalDatabase:
   host: localhost
   port: 3306
   user: humhub
   password: ""
 
+#system stuff
 humhubEmail: humhub@example.com
 humhubLanguage: en-US
 humhubDebugMode: false
+anonymosRegistration: false
+guestAcess: false
+needAproval: true
+
+# cacheconfig
+cache:
+  cacheClass=${HUMHUB_CACHE_CLASS:-"yii\caching\FileCache"}
+  cacheExpireTime=${HUMHUB_CACHE_EXPIRE_TIME:-3600}#
 
 
-
-#HUMHUB_CACHE_CLASS=${HUMHUB_CACHE_CLASS:-"yii\caching\FileCache"}
-#HUMHUB_CACHE_EXPIRE_TIME=${HUMHUB_CACHE_EXPIRE_TIME:-3600}#
-
-HUMHUB_ANONYMOUS_REGISTRATION: false
-HUMHUB_ALLOW_GUEST_ACCESS: false
-HUMHUB_NEED_APPROVAL: true
 
 
 # Mailer Config
-HUMHUB_MAILER_SYSTEM_EMAIL_ADDRESS: noreply@example.com
-HUMHUB_MAILER_SYSTEM_EMAIL_NAME: HumHub
-HUMHUB_MAILER_TRANSPORT_TYPE: php
-HUMHUB_MAILER_HOSTNAME: localhost
-HUMHUB_MAILER_PORT: 25
-HUMHUB_MAILER_USERNAME: ""
-HUMHUB_MAILER_PASSWORD: ""
-HUMHUB_MAILER_ENCRYPTION: false
-HUMHUB_MAILER_ALLOW_SELF_SIGNED_CERTS: false
+mailer: 
+  systemEmailAdress: noreply@example.com
+  systemEmailName: HumHub
+  transportType: php
+  hostname: localhost
+  port: 25
+  username: ""
+  password: ""
+  encryption: false
+  allowSelfSignedCerts: false
 
 # Redis Config
-HUMHUB_REDIS_HOSTNAME: ""
-HUMHUB_REDIS_PORT: 6379
-HUMHUB_REDIS_PASSWORD: ""
+redis:
+  hostname: ""
+  port: 6379
+  password: ""
 
 
 
