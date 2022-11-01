@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: humhub
+spec:
+  selector:
+    matchLabels:
+      app: humhub
+  template:
+    metadata:
+      labels:
+        app: humhub
+    spec:
+      containers:
+      - name: humhub
+        image: mriedmann/humhub
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+          - name: http
+            containerPort: 80
+            protocol: TCP
+          - name: https  
+            containerPort: 443
+            protocol: TCP
+        env:
+          - HUMHUB_DB_USER: humhub
+          - HUMHUB_DB_PASSWORD: humhub
+
