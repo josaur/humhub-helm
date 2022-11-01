@@ -115,9 +115,6 @@ cache:
   cacheClass=${HUMHUB_CACHE_CLASS:-"yii\caching\FileCache"}
   cacheExpireTime=${HUMHUB_CACHE_EXPIRE_TIME:-3600}#
 
-
-
-
 # Mailer Config
 mailer: 
   systemEmailAdress: noreply@example.com
@@ -156,12 +153,6 @@ php:
   maxExecutionTime: 60
   memoryLimit: 1G
   timezone: UTC
-
-
-
-
-
-
 
   ## @param %%MAIN_OBJECT_BLOCK%%.replicaCount Number of %%MAIN_CONTAINER_NAME%% replicas to deploy
   ##
