@@ -1,19 +1,20 @@
-<!--- app-name: %%CHART_NAME%% -->
+<!--- app-name: humhub -->
 
-# %%CHART_NAME%%
+# humhub
 
-%%DESCRIPTION%% (check existing examples)
+HumHub is a feature rich and highly flexible OpenSource Social Network Kit written in PHP.
 
 ## TL;DR
 
 ```console
 $ helm repo add my-repo https://charts.bitnami.com/bitnami
-$ helm install my-release my-repo/%%CHART_NAME%%
+$ helm install my-release my-repo/humhub
 ```
 
 ## Introduction
+This chart bootstraps a [humhub](https://github.com/bitnami/containers/tree/main/bitnami/humhub) deployment on a [Kubernetes](https://kubernetes.io) cluster using the [Helm](https://helm.sh) package manager.
 
-%%INTRODUCTION%% (check existing examples)
+It also packages the [Bitnami MariaDB chart](https://github.com/bitnami/charts/tree/main/bitnami/mariadb) which is required for bootstrapping a MariaDB deployment for the database requirements of the humhub application
 
 ## Prerequisites
 
@@ -27,10 +28,10 @@ $ helm install my-release my-repo/%%CHART_NAME%%
 To install the chart with the release name `my-release`:
 
 ```console
-helm install my-release my-repo/%%CHART_NAME%%
+helm install my-release my-repo/humhub
 ```
 
-The command deploys %%CHART_NAME%% on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
+The command deploys humhub on the Kubernetes cluster in the default configuration. The [Parameters](#parameters) section lists the parameters that can be configured during installation.
 
 > **Tip**: List all releases using `helm list`
 
@@ -82,9 +83,8 @@ Bitnami will release a new chart updating its containers if a new version of the
 
 ### External database support
 
-%%IF NEEDED%%
 
-You may want to have %%CHART_NAME%% connect to an external database rather than installing one inside your cluster. Typical reasons for this are to use a managed database service, or to share a common database server for all your applications. To achieve this, the chart allows you to specify credentials for an external database with the [`externalDatabase` parameter](#parameters). You should also disable the MariaDB installation with the `mariadb.enabled` option. Here is an example:
+You may want to have humhub connect to an external database rather than installing one inside your cluster. Typical reasons for this are to use a managed database service, or to share a common database server for all your applications. To achieve this, the chart allows you to specify credentials for an external database with the [`externalDatabase` parameter](#parameters). You should also disable the MariaDB installation with the `mariadb.enabled` option. Here is an example:
 
 ```console
 mariadb.enabled=false
@@ -97,8 +97,6 @@ externalDatabase.port=3306
 
 ### Ingress
 
-%%IF NEEDED%%
-
 This chart provides support for Ingress resources. If you have an ingress controller installed on your cluster, such as [nginx-ingress-controller](https://github.com/bitnami/charts/tree/main/bitnami/nginx-ingress-controller) or [contour](https://github.com/bitnami/charts/tree/main/bitnami/contour) you can utilize the ingress controller to serve your application.
 
 To enable Ingress integration, set `ingress.enabled` to `true`. The `ingress.hostname` property can be used to set the host name. The `ingress.tls` parameter can be used to add the TLS configuration for this host. It is also possible to have more than one host, with a separate TLS configuration for each host. [Learn more about configuring and using Ingress](https://docs.bitnami.com/kubernetes/apps/%%CHART_NAME%%/configuration/configure-use-ingress/).
@@ -107,18 +105,18 @@ To enable Ingress integration, set `ingress.enabled` to `true`. The `ingress.hos
 
 The chart also facilitates the creation of TLS secrets for use with the Ingress controller, with different options for certificate management. [Learn more about TLS secrets](https://docs.bitnami.com/kubernetes/apps/%%CHART_NAME%%/administration/enable-tls/).
 
-### %%OTHER_SECTIONS%%
+
 
 ## Persistence
 
-The [Bitnami %%CHART_NAME%%](https://github.com/bitnami/containers/tree/main/bitnami/%%CHART_NAME%%) image stores the %%CHART_NAME%% data and configurations at the `/bitnami` path of the container. Persistent Volume Claims are used to keep the data across deployments. [Learn more about persistence in the chart documentation](https://docs.bitnami.com/kubernetes/apps/%%CHART_NAME%%/configuration/chart-persistence/).
+The [Bitnami humhub](https://github.com/bitnami/containers/tree/main/bitnami/humhub) image stores the humhub data and configurations at the `/bitnami` path of the container. Persistent Volume Claims are used to keep the data across deployments. [Learn more about persistence in the chart documentation](https://docs.bitnami.com/kubernetes/apps/%%CHART_NAME%%/configuration/chart-persistence/).
 
 ### Additional environment variables
 
 In case you want to add extra environment variables (useful for advanced operations like custom init scripts), you can use the `extraEnvVars` property.
 
 ```yaml
-%%CHART_NAME%%:
+humhub:
   extraEnvVars:
     - name: LOG_LEVEL
       value: error
