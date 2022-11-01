@@ -4,7 +4,6 @@ metadata:
   name: {{ template "common.names.fullname" . }}
   namespace: {{ include "common.names.namespace" . | quote }}
   labels: {{- include "common.labels.standard" . | nindent 4 }}
-    app.kubernetes.io/component: %%COMPONENT_NAME%%
     {{- if .Values.commonLabels }}
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonLabels "context" $ ) | nindent 4 }}
     {{- end }}
@@ -106,9 +105,33 @@ spec:
           {{- end }}
           env:
             - name: BITNAMI_DEBUG
-              value: {{ ternary "true" "false" (or .Values.%%MAIN_OBJECT_BLOCK%%.image.debug .Values.diagnosticMode.enabled) | quote }}
-            - name: foo
-              value: bar
+              value: {{ ternary "true" "false" (or .Values.image.debug .Values.diagnosticMode.enabled) | quote }}
+            - name: HUMHUB_ADMIN_LOGIN
+              value: value: {{.Values.adminUsername}}
+            - name: HUMHUB_ADMIN_EMAIL
+              value: value: {{.Values.adminEmail | quote }}
+            - name: HUMHUB_ADMIN_PASSWORD
+              value: value: {{.Values.adminPassword | quote }}
+            - name: HUMHUB_DB_NAME
+              value: value: {{.Values.externalDatabase.name | quote }}
+            - name: HUMHUB_DB_HOST
+              value: value: {{.Values.externalDatabase.host | quote }}
+            - name: HUMHUB_DB_PORT
+              value: value: {{.Values.externalDatabase.port | quote }}
+            - name: HUMHUB_DB_PASSWORD
+              value: value: {{ .Values.externalDatabase.password | quote }}
+            - name: HUMHUB_NAME
+              value: value: {{ .Values.humhubInstanceName | quote }}
+            - name: HUMHUB_EMAIL
+              value: value: {{ .Values.humhubEmail | quote }}
+            - name: HUMHUB_LANG
+              value: value: {{ .Values.humhubLanguage | quote }}
+            - name: HUMHUB_DEBUG
+              value: value: {{ .Values.humhubDebugMode | quote }}
+            
+            
+
+          
             {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVars }}
             {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
@@ -126,31 +149,31 @@ spec:
           {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.%%MAIN_OBJECT_BLOCK%%.containerPorts.http }}
+              containerPort: {{ .Values.containerPorts.http }}
             - name: https
-              containerPort: {{ .Values.%%MAIN_OBJECT_BLOCK%%.containerPorts.https }}
+              containerPort: {{ .Values.containerPorts.https }}
           {{- if not .Values.diagnosticMode.enabled }}
-          {{- if .Values.%%MAIN_OBJECT_BLOCK%%.customLivenessProbe }}
+          {{- if .Values.customLivenessProbe }}
           livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.customLivenessProbe "context" $) | nindent 12 }}
-          {{- else if .Values.%%MAIN_OBJECT_BLOCK%%.livenessProbe.enabled }}
-          livenessProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.%%MAIN_OBJECT_BLOCK%%.livenessProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.livenessProbe.enabled }}
+          livenessProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.livenessProbe "enabled") "context" $) | nindent 12 }}
             %%httpGet || command || etc%%
           {{- end }}
-          {{- if .Values.%%MAIN_OBJECT_BLOCK%%.customReadinessProbe }}
-          readinessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.customReadinessProbe "context" $) | nindent 12 }}
-          {{- else if .Values.%%MAIN_OBJECT_BLOCK%%.readinessProbe.enabled }}
+          {{- if .Values.customReadinessProbe }}
+          readinessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.customReadinessProbe "context" $) | nindent 12 }}
+          {{- else if .Values.readinessProbe.enabled }}
           readinessProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.%%MAIN_OBJECT_BLOCK%%.readinessProbe "enabled") "context" $) | nindent 12 }}
             %%httpGet || command || etc%%
           {{- end }}
-          {{- if .Values.%%MAIN_OBJECT_BLOCK%%.customStartupProbe }}
+          {{- if .Values.customStartupProbe }}
           startupProbe: {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.customStartupProbe "context" $) | nindent 12 }}
-          {{- else if .Values.%%MAIN_OBJECT_BLOCK%%.startupProbe.enabled }}
-          startupProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.%%MAIN_OBJECT_BLOCK%%.startupProbe "enabled") "context" $) | nindent 12 }}
+          {{- else if .Values.startupProbe.enabled }}
+          startupProbe: {{- include "common.tplvalues.render" (dict "value" (omit .Values.startupProbe "enabled") "context" $) | nindent 12 }}
             %%httpGet || command || etc%%
           {{- end }}
           {{- end }}
-          {{- if .Values.%%MAIN_OBJECT_BLOCK%%.lifecycleHooks }}
-          lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.lifecycleHooks "context" $) | nindent 12 }}
+          {{- if .Values.lifecycleHooks }}
+          lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.lifecycleHooks "context" $) | nindent 12 }}
           {{- end }}
           volumeMounts:
             - name: foo
@@ -159,13 +182,13 @@ spec:
               subPath: {{ .Values.persistence.subPath }}
               {{- end }}
           {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraVolumeMounts }}
-          {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraVolumeMounts "context" $) | nindent 12 }}
+          {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
           {{- end }}
         {{- if .Values.%%MAIN_OBJECT_BLOCK%%.sidecars }}
-        {{- include "common.tplvalues.render" ( dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.sidecars "context" $) | nindent 8 }}
+        {{- include "common.tplvalues.render" ( dict "value" .Values.sidecars "context" $) | nindent 8 }}
         {{- end }}
       volumes:
-        - name: foo
+        - name: humhub-config
         {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ default (include "common.names.fullname" .) .Values.persistence.existingClaim }}
