@@ -153,6 +153,16 @@ spec:
               value: value: {{ .Values.ldap.emailAttribute | quote }} 
             - name: HUMHUB_LDAP_ID_ATTRIBUTE
               value: value: {{ .Values.ldap.idAttribute | quote }} 
+            - name: PHP_POST_MAX_SIZE
+              value: value: {{ .Values.php.postMaxSize | quote }} 
+            - name: PHP_UPLOAD_MAX_FILESIZE
+              value: value: {{ .Values.php.uploadMaxSize | quote }} 
+            - name: PHP_MAX_EXECUTION_TIME
+              value: value: {{ .Values.php.maxExecutionTime | quote }}
+            - name: PHP_MEMORY_LIMIT
+              value: value: {{ .Values.php.memoryLimit | quote }} 
+            - name: PHP_TIMEZONE
+              value: value: {{ .Values.php.timezone | quote }} 
             
 
             

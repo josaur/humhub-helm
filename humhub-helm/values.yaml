@@ -150,6 +150,12 @@ ldap:
   usernameAttribute: "cn"
   emailAttribute: "mail"
   idAttribute: ""
+php:
+  postMaxSize: 16M
+  uploadMaxSize: 10M
+  maxExecutionTime: 60
+  memoryLimit: 1G
+  timezone: UTC
 
 
 
