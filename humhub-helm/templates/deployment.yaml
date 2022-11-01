@@ -112,7 +112,6 @@ spec:
               value: value: {{.Values.adminEmail | quote }}
             - name: HUMHUB_ADMIN_PASSWORD
               value: value: {{.Values.adminPassword | quote }}
-
             - name: HUMHUB_DB_NAME
               value: value: {{.Values.externalDatabase.name | quote }}
             - name: HUMHUB_DB_HOST
@@ -174,22 +173,18 @@ spec:
             {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVars "context" $) | nindent 12 }}
             {{- end }}
           envFrom:
-            {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVarsCM }}
+            {{- if .Values.extraEnvVarsCM }}
             - configMapRef:
                 name: {{ include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVarsCM "context" $) }}
             {{- end }}
-            {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVarsSecret }}
+            {{- if .Values.extraEnvVarsSecret }}
             - secretRef:
-                name: {{ include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraEnvVarsSecret "context" $) }}
+                name: {{ include "common.tplvalues.render" (dict "value" .Values.extraEnvVarsSecret "context" $) }}
             {{- end }}
           {{- if .Values.%%MAIN_OBJECT_BLOCK%%.resources }}
-          resources: {{- toYaml .Values.%%MAIN_OBJECT_BLOCK%%.resources | nindent 12 }}
-          {{- end }}
           ports:
             - name: http
-              containerPort: {{ .Values.containerPorts.http }}
-            - name: https
-              containerPort: {{ .Values.containerPorts.https }}
+              containerPort: 80
           {{- if not .Values.diagnosticMode.enabled }}
           {{- if .Values.customLivenessProbe }}
           livenessProbe: {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.customLivenessProbe "context" $) | nindent 12 }}
@@ -214,11 +209,16 @@ spec:
           lifecycle: {{- include "common.tplvalues.render" (dict "value" .Values.lifecycleHooks "context" $) | nindent 12 }}
           {{- end }}
           volumeMounts:
-            - name: foo
-              mountPath: {{ .Values.persistence.mountPath }}
-              {{- if .Values.persistence.subPath }}
-              subPath: {{ .Values.persistence.subPath }}
-              {{- end }}
+            - name: config
+              mountPath: /var/www/localhost/htdocs/protected/config
+              subPath: config
+            - name: uploads
+              mountPath: /var/www/localhost/htdocs/uploads
+              subPath: uploads
+            - name: modules
+              mountPath: /var/www/localhost/htdocs/protected/modules
+              subPath: modules
+            {{- end }}
           {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraVolumeMounts }}
           {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumeMounts "context" $) | nindent 12 }}
           {{- end }}
@@ -226,13 +226,13 @@ spec:
         {{- include "common.tplvalues.render" ( dict "value" .Values.sidecars "context" $) | nindent 8 }}
         {{- end }}
       volumes:
-        - name: humhub-data
+        - name: uploads          
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
             claimName: {{ default (include "common.names.fullname" .) .Values.persistence.existingClaim }}
         {{- else }}
           emptyDir: {}
         {{- end }}
-        {{- if .Values.%%MAIN_OBJECT_BLOCK%%.extraVolumes }}
-        {{- include "common.tplvalues.render" (dict "value" .Values.%%MAIN_OBJECT_BLOCK%%.extraVolumes "context" $) | nindent 8 }}
+        {{- if .Values.extraVolumes }}
+        {{- include "common.tplvalues.render" (dict "value" .Values.extraVolumes "context" $) | nindent 8 }}
         {{- end }}
