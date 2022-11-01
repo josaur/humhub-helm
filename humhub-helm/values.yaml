@@ -103,20 +103,21 @@ image:
 ## @param humhubUsername 
 ##
 
-HUMHUB_ADMIN_LOGIN: admin
-HUMHUB_ADMIN_EMAIL: admin@example.com
-HUMHUB_ADMIN_PASSWORD: ""
-
-# external database
-HUMHUB_DB_NAME: humhub
-HUMHUB_DB_HOST: localhost
-HUMHUB_DB_PORT: 3306
+adminUsername: admin
+adminEmail: admin@example.com
+adminPassword: ""
+humhubInstanceName: humhub
 
 
-HUMHUB_NAME: humhub
-HUMHUB_EMAIL: humhub@example.com
-HUMHUB_LANG: en-US
-HUMHUB_DEBUG: false
+externalDatabase:
+  host: localhost
+  port: 3306
+  user: humhub
+  password: ""
+
+humhubEmail: humhub@example.com
+humhubLanguage: en-US
+humhubDebugMode: false
 
 
 
