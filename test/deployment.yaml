@@ -13,19 +13,42 @@ spec:
     spec:
       containers:
       - name: humhub
-        image: mriedmann/humhub
+        image: mriedmann/humhub:latest
         resources:
           limits:
             memory: "128Mi"
             cpu: "500m"
         ports:
-          - name: http
-            containerPort: 80
-            protocol: TCP
-          - name: https  
-            containerPort: 443
-            protocol: TCP
+          - containerPort: 80
         env:
-          - HUMHUB_DB_USER: humhub
-          - HUMHUB_DB_PASSWORD: humhub
-
+          - name: HUMHUB_DB_USER
+            value: 'humhub'
+          - name: 'HUMHUB_DB_PASSWORD'
+            value: 'humhubtest'
+          - name: HUMHUB_DB_HOST 
+            value: '10.43.171.241'
+          - name: HUMHUB_DB_NAME
+            value: 'humhub'
+          - name: HUMHUB_AUTO_INSTALL
+            value: '1'
+          - name: HUMHUB_DEBUG 
+            value: '1'
+          - name: HUMHUB_PROTO 
+            value: 'https'
+          - name: HUMHUB_HOST 
+            value: 'localhost'
+      # Mailer install setup
+          - name: HUMHUB_MAILER_SYSTEM_EMAIL_ADDRESS
+            value: 'noreply@example.com'
+          - name: HUMHUB_MAILER_SYSTEM_EMAIL_NAME
+            value: 'HumHub'
+          - name: HUMHUB_MAILER_TRANSPORT_TYPE
+            value: 'smtp'
+          - name: HUMHUB_MAILER_HOSTNAME
+            value: 'mailer'
+          - name: HUMHUB_MAILER_PORT
+            value: '1025'
+          - name: HUMHUB_MAILER_ALLOW_SELF_SIGNED_CERTS
+            value: '0'
+          - name: HUMHUB_CACHE_EXPIRE_TIME
+            value: '3600'
