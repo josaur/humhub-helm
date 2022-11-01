@@ -99,6 +99,7 @@ externalDatabase:
   host: localhost
   port: 3306
   user: humhub
+  name: humhub
   password: ""
 
 #system stuff
@@ -134,6 +135,22 @@ redis:
   hostname: ""
   port: 6379
   password: ""
+
+# LDAP
+ldap:
+  enabled: false
+  hostname: localhost
+  port: 389
+  encryption: false
+  username: humhub
+  password: ""
+  baseDn: dc=example,dc=com
+  loginFilter: ""
+  userFilter: ""
+  usernameAttribute: "cn"
+  emailAttribute: "mail"
+  idAttribute: ""
+
 
 
 
