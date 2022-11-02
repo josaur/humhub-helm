@@ -5,10 +5,11 @@
 replicaCount: 1
 
 image:
+  registry: docker.io
   repository: mriedmann/humhub
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  tag: "latest"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -141,6 +142,14 @@ autoscaling:
   maxReplicas: 100
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
+persistence:
+  enabled: true
+  storageClass: ""
+  accessModes:
+    - ReadWriteOnce
+  size: 8Gi
+  existingClaim: ""
+  selector: {}
 
 nodeSelector: {}
 
