@@ -114,6 +114,21 @@ spec:
             - name: modules
               mountPath: /var/www/localhost/htdocs/protected/modules
               subPath: modules
+      volumes:
+        - name: uploads
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim: 
+            claimName: {{ .Values.persistence.existingClaim | default (include "common.names.fullname" .) }}
+          {{- else }}
+            emptyDir: {}
+        - name: modules
+          {{- if .Values.persistence.enabled }}
+          persistentVolumeClaim: 
+            claimName: {{ .Values.persistence.existingClaim | default (include "common.names.fullname" .) }}
+          {{- else }}
+            emptyDir: {}
+          
+          
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
