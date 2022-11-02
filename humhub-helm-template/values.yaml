@@ -5,7 +5,7 @@
 replicaCount: 1
 
 image:
-  repository: nginx
+  repository: mriedmann/humhub
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
@@ -13,6 +13,73 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 fullnameOverride: ""
+
+adminUsername: admin
+adminEmail: admin@example.com
+adminPassword: ""
+humhubInstanceName: humhub
+
+# Database
+externalDatabase:
+  host: localhost
+  port: 3306
+  user: humhub
+  name: humhub
+  password: ""
+
+#system stuff
+humhubEmail: humhub@example.com
+humhubLanguage: en-US
+humhubDebugMode: false
+anonymosRegistration: false
+guestAcess: false
+needAproval: true
+
+# cacheconfig
+cache:
+  cacheClass=${HUMHUB_CACHE_CLASS:-"yii\caching\FileCache"}
+  cacheExpireTime=${HUMHUB_CACHE_EXPIRE_TIME:-3600}#
+
+# Mailer Config
+mailer: 
+  systemEmailAdress: noreply@example.com
+  systemEmailName: HumHub
+  transportType: php
+  hostname: localhost
+  port: 25
+  username: ""
+  password: ""
+  encryption: false
+  allowSelfSignedCerts: false
+
+# Redis Config
+redis:
+  enabled: false
+  hostname: ""
+  port: 6379
+  password: ""
+
+# LDAP
+ldap:
+  enabled: false
+  hostname: localhost
+  port: 389
+  encryption: false
+  username: humhub
+  password: ""
+  baseDn: dc=example,dc=com
+  loginFilter: ""
+  userFilter: ""
+  usernameAttribute: "cn"
+  emailAttribute: "mail"
+  idAttribute: ""
+php:
+  postMaxSize: 16M
+  uploadMaxSize: 10M
+  maxExecutionTime: 60
+  memoryLimit: 1G
+  timezone: UTC
+
 
 serviceAccount:
   # Specifies whether a service account should be created

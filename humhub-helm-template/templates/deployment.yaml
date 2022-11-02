@@ -47,6 +47,73 @@ spec:
               port: http
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
+          env:
+            - name: HUMHUB_ADMIN_LOGIN
+              value: value: {{.Values.adminUsername}}
+            - name: HUMHUB_ADMIN_EMAIL
+              value: value: {{.Values.adminEmail | quote }}
+            - name: HUMHUB_ADMIN_PASSWORD
+              value: value: {{.Values.adminPassword | quote }}
+            - name: HUMHUB_DB_NAME
+              value: value: {{.Values.externalDatabase.name | quote }}
+            - name: HUMHUB_DB_HOST
+              value: value: {{.Values.externalDatabase.host | quote }}
+            - name: HUMHUB_DB_PORT
+              value: value: {{.Values.externalDatabase.port | quote }}
+            - name: HUMHUB_DB_PASSWORD
+              value: value: {{ .Values.externalDatabase.password | quote }}
+            - name: HUMHUB_NAME
+              value: value: {{ .Values.humhubInstanceName | quote }}
+            - name: HUMHUB_EMAIL
+              value: value: {{ .Values.humhubEmail | quote }}
+            - name: HUMHUB_LANG
+              value: value: {{ .Values.humhubLanguage | quote }}
+            - name: HUMHUB_DEBUG
+              value: value: {{ .Values.humhubDebugMode | quote }}
+            - name: HUMHUB_ANONYMOUS_REGISTRATION
+              value: value: {{ .Values.anonymosRegistration | quote }}
+            - name: HUMHUB_ALLOW_GUEST_ACCESS
+              value: value: {{ .Values.guestAcess | quote }}
+            - name: HUMHUB_NEED_APPROVAL
+              value: value: {{ .Values.needAproval | quote }}
+            - name: HUMHUB_LDAP_ENABLED
+              value: value: {{ .Values.ldap.enabled | quote }}   
+            - name: HUMHUB_LDAP_HOSTNAME
+              value: value: {{ .Values.ldap.hostname | quote }}   
+            - name: HUMHUB_LDAP_PORT
+              value: value: {{ .Values.ldap.port | quote }}    
+            - name: HUMHUB_LDAP_BASE_DN
+              value: value: {{ .Values.ldap.baseDn | quote }}
+            - name: HUMHUB_LDAP_LOGIN_FILTER
+              value: value: {{ .Values.ldap.loginFilter | quote }}
+            - name: HUMHUB_LDAP_USER_FILTER
+              value: value: {{ .Values.ldap.userFilter | quote }}
+            - name: HUMHUB_LDAP_USERNAME_ATTRIBUTE
+              value: value: {{ .Values.ldap.usernameAttribute | quote }} 
+            - name: HUMHUB_LDAP_EMAIL_ATTRIBUTE
+              value: value: {{ .Values.ldap.emailAttribute | quote }} 
+            - name: HUMHUB_LDAP_ID_ATTRIBUTE
+              value: value: {{ .Values.ldap.idAttribute | quote }} 
+            - name: PHP_POST_MAX_SIZE
+              value: value: {{ .Values.php.postMaxSize | quote }} 
+            - name: PHP_UPLOAD_MAX_FILESIZE
+              value: value: {{ .Values.php.uploadMaxSize | quote }} 
+            - name: PHP_MAX_EXECUTION_TIME
+              value: value: {{ .Values.php.maxExecutionTime | quote }}
+            - name: PHP_MEMORY_LIMIT
+              value: value: {{ .Values.php.memoryLimit | quote }} 
+            - name: PHP_TIMEZONE
+              value: value: {{ .Values.php.timezone | quote }} 
+          volumeMounts:
+            - name: config
+              mountPath: /var/www/localhost/htdocs/protected/config
+              subPath: config
+            - name: uploads
+              mountPath: /var/www/localhost/htdocs/uploads
+              subPath: uploads
+            - name: modules
+              mountPath: /var/www/localhost/htdocs/protected/modules
+              subPath: modules
       {{- with .Values.nodeSelector }}
       nodeSelector:
         {{- toYaml . | nindent 8 }}
@@ -59,3 +126,4 @@ spec:
       tolerations:
         {{- toYaml . | nindent 8 }}
       {{- end }}
+      
