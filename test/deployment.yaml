@@ -17,6 +17,12 @@ spec:
         ports:
           - containerPort: 80
         env:
+          - name: HUMHUB_ADMIN_LOGIN
+            value: admin
+          - name: HUMHUB_ADMIN_EMAIL
+            value: mail@example.com
+          - name: HUMHUB_ADMIN_PASSWORD
+            value: xwDwd4Wrv6to9KoMx6nKhHg7Rcm
           - name: HUMHUB_DB_USER
             value: 'humhub'
           - name: 'HUMHUB_DB_PASSWORD'
