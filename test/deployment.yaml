@@ -14,10 +14,6 @@ spec:
       containers:
       - name: humhub
         image: mriedmann/humhub:latest
-        resources:
-          limits:
-            memory: "128Mi"
-            cpu: "500m"
         ports:
           - containerPort: 80
         env:
@@ -52,3 +48,10 @@ spec:
             value: '0'
           - name: HUMHUB_CACHE_EXPIRE_TIME
             value: '3600'
+      volumes:
+        - name: uploads
+          persistentVolumeClaim: 
+            claimName: upload-humhub
+        - name: modules
+          persistentVolumeClaim: 
+            claimName: modules-humuhb

@@ -1,0 +1,25 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: humhub
+  labels:
+    name: humhub
+  annotations:
+    cert-manager.io/cluster-issuer: letsencrypt-prod
+    kubernetes.io/ingress.class: nginx
+spec:
+  tls:
+    - hosts:
+      - humhub.joroeder.de
+      secretName: humhub-tls
+  rules:
+  - host: humhub.joroeder.de
+    http:
+      paths:
+      - pathType: ImplementationSpecific
+        path: "/"
+        backend:
+          service:
+            name: humhub
+            port: 
+              number: 80
