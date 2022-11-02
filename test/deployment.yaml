@@ -16,6 +16,15 @@ spec:
         image: mriedmann/humhub:latest
         ports:
           - containerPort: 80
+        volumeMount:
+          - name: uploads
+            mountPath: /var/www/localhost/htdocs/uploads
+          - name: config
+            mountPath: /var/www/localhost/htdocs/protected/config
+          - name: modules
+            mountPath: /var/www/localhost/htdocs/protected/modules
+
+         
         env:
           - name: HUMHUB_ADMIN_LOGIN
             value: admin
