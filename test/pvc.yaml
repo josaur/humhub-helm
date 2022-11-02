@@ -12,10 +12,21 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: modules-humuhb
+  name: modules-humhub
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 1Gi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: config-humhub
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 200Mi

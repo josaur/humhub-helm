@@ -26,9 +26,9 @@ spec:
           - name: HUMHUB_DB_NAME
             value: 'humhub'
           - name: HUMHUB_AUTO_INSTALL
-            value: '1'
+            value: 'true'
           - name: HUMHUB_DEBUG 
-            value: '1'
+            value: 'false'
           - name: HUMHUB_PROTO 
             value: 'https'
           - name: HUMHUB_HOST 
@@ -54,4 +54,8 @@ spec:
             claimName: upload-humhub
         - name: modules
           persistentVolumeClaim: 
-            claimName: modules-humuhb
+            claimName: modules-humhub
+        - name: config
+          persistentVolumeClaim:
+            claimName: config-humhub
+          
