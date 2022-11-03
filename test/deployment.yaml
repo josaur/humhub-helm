@@ -14,9 +14,16 @@ spec:
       containers:
       - name: humhub
         image: mriedmann/humhub:latest
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
         ports:
           - containerPort: 80
-        volumeMount:
+        volumeMounts:
           - name: uploads
             mountPath: /var/www/localhost/htdocs/uploads
           - name: config
@@ -45,7 +52,7 @@ spec:
           - name: HUMHUB_PROTO 
             value: 'https'
           - name: HUMHUB_HOST 
-            value: 'localhost'
+            value: 'humhub.joroeder.de'
       # Mailer install setup
           - name: HUMHUB_MAILER_SYSTEM_EMAIL_ADDRESS
             value: 'noreply@example.com'
