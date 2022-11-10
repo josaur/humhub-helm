@@ -49,61 +49,73 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: HUMHUB_ADMIN_LOGIN
-              value: value: {{.Values.adminUsername}}
+              value. {{.Values.adminUsername}}
             - name: HUMHUB_ADMIN_EMAIL
-              value: value: {{.Values.adminEmail | quote }}
+              value: {{.Values.adminEmail | quote }}
             - name: HUMHUB_ADMIN_PASSWORD
-              value: value: {{.Values.adminPassword | quote }}
+              value: {{.Values.adminPassword | quote }}
             - name: HUMHUB_DB_NAME
-              value: value: {{.Values.externalDatabase.name | quote }}
+              value: {{.Values.externalDatabase.name | quote }}
             - name: HUMHUB_DB_HOST
-              value: value: {{.Values.externalDatabase.host | quote }}
+              value: {{.Values.externalDatabase.host | quote }}
             - name: HUMHUB_DB_PORT
-              value: value: {{.Values.externalDatabase.port | quote }}
+              value: {{.Values.externalDatabase.port | quote }}
             - name: HUMHUB_DB_PASSWORD
-              value: value: {{ .Values.externalDatabase.password | quote }}
+              value: {{ .Values.externalDatabase.password | quote }}
             - name: HUMHUB_NAME
-              value: value: {{ .Values.humhubInstanceName | quote }}
+              value: {{ .Values.humhubInstanceName | quote }}
             - name: HUMHUB_EMAIL
-              value: value: {{ .Values.humhubEmail | quote }}
+              value: {{ .Values.humhubEmail | quote }}
             - name: HUMHUB_LANG
-              value: value: {{ .Values.humhubLanguage | quote }}
+              value: {{ .Values.humhubLanguage | quote }}
             - name: HUMHUB_DEBUG
-              value: value: {{ .Values.humhubDebugMode | quote }}
+              value: {{ .Values.humhubDebugMode | quote }}
             - name: HUMHUB_ANONYMOUS_REGISTRATION
-              value: value: {{ .Values.anonymosRegistration | quote }}
+              value: {{ .Values.anonymosRegistration | quote }}
             - name: HUMHUB_ALLOW_GUEST_ACCESS
-              value: value: {{ .Values.guestAcess | quote }}
+              value: {{ .Values.guestAcess | quote }}
             - name: HUMHUB_NEED_APPROVAL
-              value: value: {{ .Values.needAproval | quote }}
+              value: {{ .Values.needAproval | quote }}
             - name: HUMHUB_LDAP_ENABLED
-              value: value: {{ .Values.ldap.enabled | quote }}   
+              value: {{ .Values.ldap.enabled | quote }}   
             - name: HUMHUB_LDAP_HOSTNAME
-              value: value: {{ .Values.ldap.hostname | quote }}   
+              value: {{ .Values.ldap.hostname | quote }}   
             - name: HUMHUB_LDAP_PORT
-              value: value: {{ .Values.ldap.port | quote }}    
+              value: {{ .Values.ldap.port | quote }}    
             - name: HUMHUB_LDAP_BASE_DN
-              value: value: {{ .Values.ldap.baseDn | quote }}
+              value: {{ .Values.ldap.baseDn | quote }}
             - name: HUMHUB_LDAP_LOGIN_FILTER
-              value: value: {{ .Values.ldap.loginFilter | quote }}
+              value: {{ .Values.ldap.loginFilter | quote }}
             - name: HUMHUB_LDAP_USER_FILTER
-              value: value: {{ .Values.ldap.userFilter | quote }}
+              value: {{ .Values.ldap.userFilter | quote }}
             - name: HUMHUB_LDAP_USERNAME_ATTRIBUTE
-              value: value: {{ .Values.ldap.usernameAttribute | quote }} 
+              value: {{ .Values.ldap.usernameAttribute | quote }} 
             - name: HUMHUB_LDAP_EMAIL_ATTRIBUTE
-              value: value: {{ .Values.ldap.emailAttribute | quote }} 
+              value: {{ .Values.ldap.emailAttribute | quote }} 
             - name: HUMHUB_LDAP_ID_ATTRIBUTE
-              value: value: {{ .Values.ldap.idAttribute | quote }} 
+              value: {{ .Values.ldap.idAttribute | quote }} 
+            - name: HUMHUB_LDAP_REFRESH_USERS
+              value: {{ .Values.ldap.refreshUsers | quote }}
+            - name: HUMHUB_LDAP_CACERT
+              value: {{ .Values.ldap.cacert | quote }}
+            - name: HUMHUB_LDAP_SKIP_VERIFY
+              value: {{ .Values.ldap.cacert | quote }}
             - name: PHP_POST_MAX_SIZE
-              value: value: {{ .Values.php.postMaxSize | quote }} 
+              value: {{ .Values.php.postMaxSize | quote }} 
             - name: PHP_UPLOAD_MAX_FILESIZE
-              value: value: {{ .Values.php.uploadMaxSize | quote }} 
+              value: {{ .Values.php.uploadMaxSize | quote }} 
             - name: PHP_MAX_EXECUTION_TIME
-              value: value: {{ .Values.php.maxExecutionTime | quote }}
+              value: {{ .Values.php.maxExecutionTime | quote }}
             - name: PHP_MEMORY_LIMIT
-              value: value: {{ .Values.php.memoryLimit | quote }} 
+              value: {{ .Values.php.memoryLimit | quote }} 
             - name: PHP_TIMEZONE
-              value: value: {{ .Values.php.timezone | quote }} 
+              value: {{ .Values.php.timezone | quote }} 
+            - name: HUMHUB_REDIS_HOSTNAME
+              value: {{ .Values.redis.hostname | quote }}
+            - name: HUMHUB_REDIS_PORT
+              value: {{ .Values.redis.port | quote }}
+            - name: HUMHUB_REDIS_PASSWORD
+              value: {{ .Values.redis.password | quote }}
           volumeMounts:
             - name: config
               mountPath: /var/www/localhost/htdocs/protected/config
