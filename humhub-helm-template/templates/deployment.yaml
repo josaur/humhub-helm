@@ -118,26 +118,26 @@ spec:
         - name: uploads
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim: 
-            claimName: {{ .Values.persistence.existingClaim | default (include "common.names.fullname" .) }}
+            claimName: {{ .Values.persistence.existingClaim | default "uploads" }}
           {{- else }}
             emptyDir: {}
         - name: modules
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim: 
-            claimName: {{ .Values.persistence.existingClaim | default (include "common.names.fullname" .) }}
+            claimName: {{ .Values.persistence.existingClaim | default "modules" }}
           {{- else }}
             emptyDir: {}
           
           
-      {{- with .Values.nodeSelector }}
-      nodeSelector:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.affinity }}
-      affinity:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      {{- with .Values.tolerations }}
-      tolerations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
+      #{{- with .Values.nodeSelector }}
+      #nodeSelector:
+      #  {{- toYaml . | nindent 8 }}
+      #{{- end }}
+      #{{- with .Values.affinity }}
+      #affinity:
+      #  {{- toYaml . | nindent 8 }}
+      #{{- end }}
+      #{{- with .Values.tolerations }}
+      #tolerations:
+      #  {{- toYaml . | nindent 8 }}
+      #{{- end }}

@@ -24,7 +24,7 @@ spec:
         ports:
           - containerPort: 80
         volumeMounts:
-          - name: uploads
+          - name: uploads```
             mountPath: /var/www/localhost/htdocs/uploads
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config
@@ -70,6 +70,17 @@ spec:
             value: '0'
           - name: HUMHUB_CACHE_EXPIRE_TIME
             value: '3600'
+      
+       # Redis Config
+          - name: HUMHUB_REDIS_HOSTNAME
+            value: '10.43.14.139'
+          - name: HUMHUB_REDIS_PORT
+            value: '6379'
+          - name: HUMHUB_REDIS_PASSWORD
+            value: '9dTIBXHRCs'
+          - name: HUMHUB_CACHE_CLASS
+            value: 'yii\redis\Cache'
+            
       volumes:
         - name: uploads
           persistentVolumeClaim: 
