@@ -9,7 +9,7 @@ image:
   repository: mriedmann/humhub
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
-  tag: "latest"
+  tag: "1.12.1"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -38,8 +38,8 @@ needAproval: true
 
 # cacheconfig
 cache:
-  cacheClass=${HUMHUB_CACHE_CLASS:-"yii\caching\FileCache"}
-  cacheExpireTime=${HUMHUB_CACHE_EXPIRE_TIME:-3600}#
+  cacheClass: ""
+  cacheExpireTime: 3600
 
 # Mailer Config
 mailer: 
@@ -74,6 +74,10 @@ ldap:
   usernameAttribute: "cn"
   emailAttribute: "mail"
   idAttribute: ""
+  refreshUsers: ""
+  cacert: ""
+  skipVerify: ""
+
 php:
   postMaxSize: 16M
   uploadMaxSize: 10M
@@ -145,10 +149,13 @@ autoscaling:
 persistence:
   enabled: true
   storageClass: ""
-  accessModes:
+  accessMode:
     - ReadWriteOnce
   size: 8Gi
-  existingClaim: ""
+  existingClaim:
+    uploads: ""
+    modules: ""
+    config: ""
   selector: {}
 
 nodeSelector: {}
