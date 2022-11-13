@@ -49,7 +49,7 @@ spec:
             {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: HUMHUB_ADMIN_LOGIN
-              value. {{.Values.adminUsername}}
+              value: {{.Values.adminUsername}}
             - name: HUMHUB_ADMIN_EMAIL
               value: {{.Values.adminEmail | quote }}
             - name: HUMHUB_ADMIN_PASSWORD
@@ -99,7 +99,7 @@ spec:
             - name: HUMHUB_LDAP_CACERT
               value: {{ .Values.ldap.cacert | quote }}
             - name: HUMHUB_LDAP_SKIP_VERIFY
-              value: {{ .Values.ldap.cacert | quote }}
+              value: {{ .Values.ldap.skipVerify | quote }}
             - name: PHP_POST_MAX_SIZE
               value: {{ .Values.php.postMaxSize | quote }} 
             - name: PHP_UPLOAD_MAX_FILESIZE
