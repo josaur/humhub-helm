@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: humhub
-        image: mriedmann/humhub:latest
+        image: mrichart.naedmann/humhub:latest
         resources:
           requests:
             memory: "64Mi"
@@ -29,7 +29,7 @@ spec:
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config
           - name: modules
-            mountPath: /var/www/localhost/htdocs/protected/modules 
+            mountPath: /var/www/localhost/htdocs/protected/modules
           - name: theme
             mountPath: /var/www/localhost/htdocs/themes/HumHub/css/
         env:
@@ -43,7 +43,7 @@ spec:
             value: 'humhub'
           - name: 'HUMHUB_DB_PASSWORD'
             value: 'humhubtest'
-          - name: HUMHUB_DB_HOST 
+          - name: HUMHUB_DB_HOST
             value: '10.43.171.241'
           - name: HUMHUB_DB_NAME
             value: 'humhub'

@@ -1,38 +1,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "chart.fullname" . }}
-  labels:
-    {{- include "chart.labels" . | nindent 4 }}
+  name: humhub
 spec:
-  {{- if not .Values.autoscaling.enabled }}
-  replicas: {{ .Values.replicaCount }}
-  {{- end }}
   selector:
     matchLabels:
-      {{- include "chart.selectorLabels" . | nindent 6 }}
+      app: humhub
   template:
     metadata:
-      {{- with .Values.podAnnotations }}
-      annotations:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
       labels:
-        {{- include "chart.selectorLabels" . | nindent 8 }}
+        app: humhub
     spec:
-      {{- with .Values.imagePullSecrets }}
-      imagePullSecrets:
-        {{- toYaml . | nindent 8 }}
-      {{- end }}
-      serviceAccountName: {{ include "chart.serviceAccountName" . }}
-      securityContext:
-        {{- toYaml .Values.podSecurityContext | nindent 8 }}
       containers:
-        - name: {{ .Chart.Name }}
-          securityContext:
-            {{- toYaml .Values.securityContext | nindent 12 }}
-          image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-          imagePullPolicy: {{ .Values.image.pullPolicy }}
+        - name: humhub
           ports:
             - name: http
               containerPort: 80
@@ -45,8 +25,6 @@ spec:
             httpGet:
               path: /
               port: http
-          resources:
-            {{- toYaml .Values.resources | nindent 12 }}
           env:
             - name: HUMHUB_ADMIN_LOGIN
               value: {{.Values.adminUsername}}
@@ -116,40 +94,3 @@ spec:
               value: {{ .Values.redis.port | quote }}
             - name: HUMHUB_REDIS_PASSWORD
               value: {{ .Values.redis.password | quote }}
-          volumeMounts:
-            - name: config
-              mountPath: /var/www/localhost/htdocs/protected/config
-              subPath: config
-            - name: uploads
-              mountPath: /var/www/localhost/htdocs/uploads
-              subPath: uploads
-            - name: modules
-              mountPath: /var/www/localhost/htdocs/protected/modules
-              subPath: modules
-      volumes:
-        - name: uploads
-          {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim: 
-            claimName: {{ .Values.persistence.existingClaim | default "uploads" }}
-          {{- else }}
-            emptyDir: {}
-        - name: modules
-          {{- if .Values.persistence.enabled }}
-          persistentVolumeClaim: 
-            claimName: {{ .Values.persistence.existingClaim | default "modules" }}
-          {{- else }}
-            emptyDir: {}
-          
-          
-      #{{- with .Values.nodeSelector }}
-      #nodeSelector:
-      #  {{- toYaml . | nindent 8 }}
-      #{{- end }}
-      #{{- with .Values.affinity }}
-      #affinity:
-      #  {{- toYaml . | nindent 8 }}
-      #{{- end }}
-      #{{- with .Values.tolerations }}
-      #tolerations:
-      #  {{- toYaml . | nindent 8 }}
-      #{{- end }}

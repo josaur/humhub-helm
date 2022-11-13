@@ -12,8 +12,8 @@ image:
   tag: "1.12.1"
 
 imagePullSecrets: []
-nameOverride: ""
-fullnameOverride: ""
+nameOverride: "humhub"
+fullnameOverride: "humhub"
 
 adminUsername: admin
 adminEmail: admin@example.com
