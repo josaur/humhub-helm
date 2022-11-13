@@ -13,7 +13,7 @@ spec:
     spec:
       containers:
       - name: humhub
-        image: mrichart.naedmann/humhub:latest
+        image: mriedmann/humhub:latest
         resources:
           requests:
             memory: "64Mi"
@@ -24,7 +24,7 @@ spec:
         ports:
           - containerPort: 80
         volumeMounts:
-          - name: uploads```
+          - name: uploads
             mountPath: /var/www/localhost/htdocs/uploads
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config
