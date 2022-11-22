@@ -31,7 +31,10 @@ spec:
           - name: HUMHUB_ADMIN_EMAIL
             value: {{.Values.adminEmail | quote }}
           - name: HUMHUB_ADMIN_PASSWORD
-            value: {{.Values.adminPassword | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "humhub.secretName" . }}
+                key: password
           - name: HUMHUB_DB_NAME
             value: {{.Values.externalDatabase.name | quote }}
           - name: HUMHUB_DB_HOST
@@ -39,7 +42,10 @@ spec:
           - name: HUMHUB_DB_PORT
             value: {{.Values.externalDatabase.port | quote }}
           - name: HUMHUB_DB_PASSWORD
-            value: {{ .Values.externalDatabase.password | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "humhub.databaseSecretName" . }}
+                key: password
           - name: HUMHUB_NAME
             value: {{ .Values.humhubInstanceName | quote }}
           - name: HUMHUB_EMAIL

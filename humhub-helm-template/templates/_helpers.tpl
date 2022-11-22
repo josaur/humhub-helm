@@ -60,3 +60,26 @@ Create the name of the service account to use
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
 {{- end }}
+
+{{/*
+Return the humhub Secret Name
+*/}}
+{{- define "humhub.secretName" -}}
+{{- if .Values.existingSecret }}
+    {{- printf "%s" .Values.existingSecret -}}
+{{- else -}}
+    {{- printf "%s" (include "humhub.fullname" .) -}}
+{{- end -}}
+{{- end -}}
+
+
+{{/*
+Return the humhub-database Secret Name
+*/}}
+{{- define "humhub.databaseSecretName" -}}
+{{- if .Values.externalDatabase.existingSecret }}
+    {{- printf "%s" .Values.externalDatabase.existingSecret -}}
+{{- else -}}
+    {{- printf "%s-database" (include "humhub.fullname" .) -}}
+{{- end -}}
+{{- end -}}

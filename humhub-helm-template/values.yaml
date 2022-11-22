@@ -18,6 +18,7 @@ fullnameOverride: ""
 adminUsername: admin
 adminEmail: admin@example.com
 adminPassword: ""
+existingSecret: ""
 humhubInstanceName: humhub
 
 # Database
@@ -27,6 +28,7 @@ externalDatabase:
   user: humhub
   name: humhub
   password: ""
+  existingSecret: ""
 
 #system stuff
 humhubEmail: humhub@example.com
