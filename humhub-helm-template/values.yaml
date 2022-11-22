@@ -12,8 +12,8 @@ image:
   tag: "1.12.1"
 
 imagePullSecrets: []
-nameOverride: "humhub"
-fullnameOverride: "humhub"
+nameOverride: ""
+fullnameOverride: ""
 
 adminUsername: admin
 adminEmail: admin@example.com
@@ -148,15 +148,26 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 persistence:
   enabled: true
-  storageClass: ""
-  accessMode:
-    - ReadWriteOnce
-  size: 8Gi
-  existingClaim:
-    uploads: ""
-    modules: ""
-    config: ""
+  config:
+    storageClass: ""
+    size: "20Mi"
+    accessMode:
+      - ReadWriteOnce
+    existingClaim: ""
+  uploads:
+    storageClass: ""
+    size: "8Gi"
+    accessMode:
+      - ReadWriteOnce
+    existingClaim: ""
+  modules:
+    storageClass: ""
+    size: "5Gi"
+    accessMode:
+      - ReadWriteOnce
+    existingClaim: ""
   selector: {}
+  annotations: {}
 
 nodeSelector: {}
 

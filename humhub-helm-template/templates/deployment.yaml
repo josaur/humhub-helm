@@ -108,21 +108,21 @@ spec:
         - name: uploads
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim.uploads }}{{ .Values.persistence.existingClaim.uploads }}{{- else }}{{ template "chart.fullname" . }}-uploads{{- end }}
+            claimName: {{ if .Values.persistence.uploads.existingClaim }}{{ .Values.persistence.uploads.existingClaim }}{{- else }}{{ template "humhub.fullname" . }}-uploads{{- end }}
           {{- else }}
           emptyDir: {}
           {{- end }}
         - name: modules
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim.modules }}{{ .Values.persistence.existingClaim.modules }}{{- else }}{{ template "chart.fullname" . }}-modules{{- end }}        
+            claimName: {{ if .Values.persistence.modules.existingClaim }}{{ .Values.persistence.modules.existingClaim }}{{- else }}{{ template "humhub.fullname" . }}-modules{{- end }}        
           {{- else }}
           emptyDir: {}
           {{- end }}
         - name: config
           {{- if .Values.persistence.enabled }}
           persistentVolumeClaim:
-            claimName: {{ if .Values.persistence.existingClaim.config }}{{ .Values.persistence.existingClaim.config }}{{- else }}{{ template "chart.fullname" . }}-config{{- end }}
+            claimName: {{ if .Values.persistence.config.existingClaim }}{{ .Values.persistence.config.existingClaim }}{{- else }}{{ template "humhub.fullname" . }}-config{{- end }}
           {{- else }}
           emptyDir: {}
           {{- end }}

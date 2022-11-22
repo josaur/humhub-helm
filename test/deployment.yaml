@@ -94,5 +94,3 @@ spec:
         - name: theme
           configMap: 
             name: theme
-            
-          
