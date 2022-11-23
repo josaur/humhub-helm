@@ -23,11 +23,11 @@ humhubInstanceName: humhub
 
 # Database
 externalDatabase:
-  host: localhost
+  host: mariadb.maria.svc.cluster.local
   port: 3306
   user: humhub
   name: humhub
-  password: ""
+  password: "Uex9Jm3RZuK9MAUbnKaFrAr"
   existingSecret: ""
 
 #system stuff
@@ -35,8 +35,9 @@ humhubEmail: humhub@example.com
 humhubLanguage: en-US
 humhubDebugMode: false
 anonymosRegistration: false
-guestAcess: false
-needAproval: true
+guestAcess: "false"
+needAproval: "true"
+autoinstall: "true"
 
 # cacheconfig
 cache:
@@ -153,20 +154,17 @@ persistence:
   config:
     storageClass: ""
     size: "20Mi"
-    accessMode:
-      - ReadWriteOnce
+    accessMode: ReadWriteOnce
     existingClaim: ""
   uploads:
     storageClass: ""
     size: "8Gi"
-    accessMode:
-      - ReadWriteOnce
+    accessMode: ReadWriteOnce
     existingClaim: ""
   modules:
     storageClass: ""
     size: "5Gi"
-    accessMode:
-      - ReadWriteOnce
+    accessMode: ReadWriteOnce
     existingClaim: ""
   selector: {}
   annotations: {}

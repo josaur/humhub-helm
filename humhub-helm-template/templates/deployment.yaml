@@ -2,17 +2,20 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: humhub
+  labels:
+  {{- include "humhub.selectorLabels" . | nindent 4 }}
 spec:
   selector:
     matchLabels:
-      app: humhub
+  {{- include "humhub.selectorLabels" . | nindent 6 }}
   template:
     metadata:
       labels:
-        app: humhub
+        {{- include "humhub.selectorLabels" . | nindent 8 }}
     spec:
       containers:
       - name: humhub
+        image: {{.Values.image.repository}}
         ports:
           - name: http
             containerPort: 80
@@ -41,6 +44,8 @@ spec:
             value: {{.Values.externalDatabase.host | quote }}
           - name: HUMHUB_DB_PORT
             value: {{.Values.externalDatabase.port | quote }}
+          - name: HUMHUB_DB_USER
+            value: {{.Values.externalDatabase.user | quote }}
           - name: HUMHUB_DB_PASSWORD
             valueFrom:
               secretKeyRef:
@@ -48,6 +53,8 @@ spec:
                 key: password
           - name: HUMHUB_NAME
             value: {{ .Values.humhubInstanceName | quote }}
+          - name: HUMHUB_AUTO_INSTALL
+            value: {{ .Values.autoinstall | quote }}
           - name: HUMHUB_EMAIL
             value: {{ .Values.humhubEmail | quote }}
           - name: HUMHUB_LANG
