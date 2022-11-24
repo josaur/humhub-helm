@@ -17,24 +17,27 @@ fullnameOverride: ""
 
 adminUsername: admin
 adminEmail: admin@example.com
-adminPassword: ""
+adminPassword: "admin"
+existingSecret: ""
 humhubInstanceName: humhub
 
 # Database
 externalDatabase:
-  host: localhost
+  host: mariadb.maria.svc.cluster.local
   port: 3306
   user: humhub
   name: humhub
-  password: ""
+  password: "Uex9Jm3RZuK9MAUbnKaFrAr"
+  existingSecret: ""
 
 #system stuff
 humhubEmail: humhub@example.com
 humhubLanguage: en-US
 humhubDebugMode: false
 anonymosRegistration: false
-guestAcess: false
-needAproval: true
+guestAcess: "false"
+needAproval: "true"
+autoinstall: "true"
 
 # cacheconfig
 cache:
@@ -55,10 +58,16 @@ mailer:
 
 # Redis Config
 redis:
-  enabled: false
-  hostname: ""
-  port: 6379
-  password: ""
+  enabled: true # if an deployment of redis will be installed
+  humhubEnabled: true # if the configs are mapped to humhub
+  hostname: "" # host for external deploymant
+  port: 6379 # the port for an  external deployment
+  auth:
+    password: ""
+    existingSecret: ""
+  architecture: standalone #allowed: replication; standalone
+  master.persistence.enabled: false
+
 
 # LDAP
 ldap:
@@ -148,15 +157,23 @@ autoscaling:
   # targetMemoryUtilizationPercentage: 80
 persistence:
   enabled: true
-  storageClass: ""
-  accessMode:
-    - ReadWriteOnce
-  size: 8Gi
-  existingClaim:
-    uploads: ""
-    modules: ""
-    config: ""
+  config:
+    storageClass: ""
+    size: "20Mi"
+    accessMode: ReadWriteOnce
+    existingClaim: ""
+  uploads:
+    storageClass: ""
+    size: "8Gi"
+    accessMode: ReadWriteOnce
+    existingClaim: ""
+  modules:
+    storageClass: ""
+    size: "5Gi"
+    accessMode: ReadWriteOnce
+    existingClaim: ""
   selector: {}
+  annotations: {}
 
 nodeSelector: {}
 

@@ -21,10 +21,10 @@ version: 0.1.0
 # incremented each time you make changes to the application. Versions are not expected to
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
-appVersion: "1.11.4"
+appVersion: "1.12.1"
 dependencies:
-  - name: common
+  - condition: redis.enabled
+    name: redis
     repository: https://charts.bitnami.com/bitnami
-    tags:
-      - bitnami-common
-    version: 2.x.x
+    version: 17.3.11
+    
