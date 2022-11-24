@@ -75,13 +75,13 @@ ldap:
   hostname: localhost
   port: 389
   encryption: false
-  username: humhub
+  username: ""
   password: ""
-  baseDn: dc=example,dc=com
+  baseDn: ""
   loginFilter: ""
   userFilter: ""
-  usernameAttribute: "cn"
-  emailAttribute: "mail"
+  usernameAttribute: ""
+  emailAttribute: ""
   idAttribute: ""
   refreshUsers: ""
   cacert: ""
