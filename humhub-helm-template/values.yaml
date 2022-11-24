@@ -17,7 +17,7 @@ fullnameOverride: ""
 
 adminUsername: admin
 adminEmail: admin@example.com
-adminPassword: ""
+adminPassword: "admin"
 existingSecret: ""
 humhubInstanceName: humhub
 
@@ -58,10 +58,16 @@ mailer:
 
 # Redis Config
 redis:
-  enabled: false
-  hostname: ""
-  port: 6379
-  password: ""
+  enabled: true # if an deployment of redis will be installed
+  humhubEnabled: true # if the configs are mapped to humhub
+  hostname: "" # host for external deploymant
+  port: 6379 # the port for an  external deployment
+  auth:
+    password: ""
+    existingSecret: ""
+  architecture: standalone #allowed: replication; standalone
+  master.persistence.enabled: false
+
 
 # LDAP
 ldap:

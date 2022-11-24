@@ -102,11 +102,14 @@ spec:
           - name: PHP_TIMEZONE
             value: {{ .Values.php.timezone | quote }} 
           - name: HUMHUB_REDIS_HOSTNAME
-            value: {{ .Values.redis.hostname | quote }}
+            value: {{ include "humhub.redisHost" . }}
           - name: HUMHUB_REDIS_PORT
             value: {{ .Values.redis.port | quote }}
           - name: HUMHUB_REDIS_PASSWORD
-            value: {{ .Values.redis.password | quote }}
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "humhub.redisSecretName" . }}
+                key: redis-password
         volumeMounts:
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config

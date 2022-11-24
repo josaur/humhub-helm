@@ -83,3 +83,41 @@ Return the humhub-database Secret Name
     {{- printf "%s-database" (include "humhub.fullname" .) -}}
 {{- end -}}
 {{- end -}}
+
+{{/*
+Return the path to redis
+*/}}
+{{- define "humhub.redisHost" -}}
+{{- if (not .Values.redis.humhubEnabled) }} 
+    {{- printf "" -}}
+{{- else -}}
+{{- if  .Values.redis.enabled }}    
+    {{- printf "%s-redis-master.%s.svc.cluster.local" .Release.Name .Release.Namespace -}}
+{{- else -}}
+    {{- printf  .Values.redis.hostname  -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{- define "humhub.redisPort" -}}
+{{- if (not .Values.redis.humhubEnabled) }} 
+    {{- printf "" -}}
+{{- else -}}
+{{- if  .Values.redis.enabled }}    
+    {{- printf "6379" -}}
+{{- else -}}
+    {{- printf  .Values.redis.port  -}}
+{{- end -}}
+{{- end -}}
+{{- end -}}
+
+{{/*
+Return the humhub-redis Secret Name
+*/}}
+{{- define "humhub.redisSecretName" -}}
+{{- if .Values.redis.auth.existingSecret }}
+    {{- printf "%s" .Values.redis.auth.existingSecret -}}
+{{- else -}}
+    {{- printf "%s-redis" .Release.Name -}}
+{{- end -}}
+{{- end -}}
