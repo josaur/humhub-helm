@@ -121,3 +121,8 @@ Return the humhub-redis Secret Name
     {{- printf "%s-redis" .Release.Name -}}
 {{- end -}}
 {{- end -}}
+
+{{- define "humhub.image" -}}
+    {{- printf "%s/%s:%s" .Values.image.registry .Values.image.repository .Values.image.tag -}}
+
+{{- end -}}
