@@ -120,6 +120,11 @@ spec:
           - name: modules
             mountPath: /var/www/localhost/htdocs/protected/modules
             subPath: modules
+          {{- if .Values.theme.customCssConfigMap }}
+          - name: theme
+            mountPath: /var/www/localhost/htdocs/themes/HumHub/css
+            subPath: css
+          {{- end }}
       volumes:
         - name: uploads
           {{- if .Values.persistence.enabled }}
@@ -142,4 +147,9 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
+        {{- if .Values.theme.customCssConfigMap }}
+        - name: theme
+          configMap:
+            name: {{- .Values.theme.customCssConfigMap }}
+        {{- end }}
           

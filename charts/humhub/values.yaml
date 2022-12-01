@@ -56,6 +56,9 @@ mailer:
   encryption: false
   allowSelfSignedCerts: false
 
+theme:
+  customCssConfigMap: ""
+
 # Redis Config
 redis:
   enabled: true # if an deployment of redis will be installed
