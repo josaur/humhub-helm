@@ -150,6 +150,6 @@ spec:
         {{- if .Values.theme.customCssConfigMap }}
         - name: theme
           configMap:
-            name: {{- .Values.theme.customCssConfigMap }}
+            name: {{ .Values.theme.customCssConfigMap }}
         {{- end }}
           
