@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: theme
+data:
+  primary: {{ .Values.theming.primary | quote }}
+  info: {{ .Values.theming.info | quote }}
+  warning: {{ .Values.theming.warning | quote }}
+  default: {{ .Values.theming.default | quote }}
+  sucess: {{ .Values.theming.sucess | quote }}
+  danger: {{ .Values.theming.danger | quote }}
+  medialistnew: {{ .Values.theming.medialistnew | quote }}
+  cardbackground: {{ .Values.theming.cardbackground | quote }} 
+  topbarfirstbuttonbackground: {{ .Values.theming.topbarfirstbuttonbackground | quote }} 
+  infolabel: {{ .Values.theming.infolabel | quote }} 
+  hover: {{ .Values.theming.hover | quote }} 
