@@ -3,6 +3,21 @@ entries:
   humhub:
   - apiVersion: v2
     appVersion: 1.12.1
+    created: "2022-12-05T22:06:25.951378317Z"
+    dependencies:
+    - condition: redis.enabled
+      name: redis
+      repository: https://charts.bitnami.com/bitnami
+      version: 17.3.11
+    description: A Helm chart for humhub
+    digest: 87a3b42902413a2c815d0d41e03065d99f6c87848a379d289ea706328a5082fc
+    name: humhub
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/humhub-0.1.9/humhub-0.1.9.tgz
+    version: 0.1.9
+  - apiVersion: v2
+    appVersion: 1.12.1
     created: "2022-12-02T14:16:12.333469578Z"
     dependencies:
     - condition: redis.enabled
@@ -137,4 +152,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2022-12-02T14:16:12.333500478Z"
+generated: "2022-12-05T22:06:25.951433717Z"
