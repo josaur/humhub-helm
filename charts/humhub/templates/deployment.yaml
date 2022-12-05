@@ -16,20 +16,45 @@ spec:
       containers:
       - name: humhub
         image: {{include "humhub.image" . }}
+        lifecycle:
+          postStart:
+            exec:
+              command: 
+              - /bin/sh
+              - '-c'
+              - |
+                cp -r /var/www/localhost/htdocs/themes/HumHub  /var/www/localhost/htdocs/themes/fromConfigmap
+                sed -i "s/435f6f/$PRIMARY/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/21A1B3/$INFO/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/FFC107/$WARNING/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/f3f3f3/$DEFAULT/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/97d271/$SUCESS/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/FC4A64/$DANGER/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/c5eff4/$MEDIALISTNEW/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/f5f5f5/$CARDBACKGROUND/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/4d6d7f/$TOPBARFIRSTBUTTONBACKGROUND/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/1d8e9d/$INFOLABEL/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/527588/$HOVER/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
         ports:
           - name: http
             containerPort: 80
-            protocol: TCP
+            protocol: TCP        
+        startupProbe:
+          httpGet:
+            path: /
+            port: http
+          failureThreshold: 30
+          periodSeconds: 10
         livenessProbe:
           httpGet:
             path: /
             port: http
-            timeoutSeconds: 3
+          timeoutSeconds: 3
         readinessProbe:
           httpGet:
             path: /
             port: http
-            timeoutSeconds: 3
+          timeoutSeconds: 3
         env:
           - name: HUMHUB_ADMIN_LOGIN
             value: {{.Values.adminUsername}}
@@ -112,6 +137,58 @@ spec:
               secretKeyRef:
                 name: {{ include "humhub.redisSecretName" . }}
                 key: redis-password
+          - name: PRIMARY
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: primary
+          - name: INFO
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: info
+          - name: WARNING
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: warning
+          - name: DEFAULT
+            value: ff5733
+          - name: SUCESS
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: sucess
+          - name: DANGER
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: danger
+          - name: CARDBACKGROUND
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: cardbackground
+          - name: MEDIALISTNEW
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: medialistnew
+          - name: TOPBARFIRSTBUTTONBACKGROUND
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: topbarfirstbuttonbackground
+          - name: INFOLABEL
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: infolabel
+          - name: HOVER
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: hover
         volumeMounts:
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config
@@ -122,10 +199,6 @@ spec:
           - name: modules
             mountPath: /var/www/localhost/htdocs/protected/modules
             subPath: modules
-          {{- if .Values.theme.customCssConfigMap }}
-          - name: theme
-            mountPath: /var/www/localhost/htdocs/themes/HumHub/css
-          {{- end }}
       volumes:
         - name: uploads
           {{- if .Values.persistence.enabled }}
@@ -148,9 +221,3 @@ spec:
           {{- else }}
           emptyDir: {}
           {{- end }}
-        {{- if .Values.theme.customCssConfigMap }}
-        - name: theme
-          configMap:
-            name: {{ .Values.theme.customCssConfigMap }}
-        {{- end }}
-          
