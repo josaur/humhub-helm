@@ -35,6 +35,8 @@ spec:
                 sed -i "s/4d6d7f/$TOPBARFIRSTBUTTONBACKGROUND/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
                 sed -i "s/1d8e9d/$INFOLABEL/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
                 sed -i "s/527588/$HOVER/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/d7d7d7/$D7D7D7/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
+                sed -i "s/f8b763/$F8B763/g" /var/www/localhost/htdocs/themes/fromConfigmap/css/theme.css
         ports:
           - name: http
             containerPort: 80
@@ -190,6 +192,17 @@ spec:
               configMapKeyRef:
                 name: theme
                 key: hover
+          - name: D7D7D7
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: d7d7d7
+          - name: F8B763
+            valueFrom:
+              configMapKeyRef:
+                name: theme
+                key: f8b763
+          
         volumeMounts:
           - name: config
             mountPath: /var/www/localhost/htdocs/protected/config

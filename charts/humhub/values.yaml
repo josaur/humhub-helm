@@ -57,7 +57,7 @@ mailer:
   allowSelfSignedCerts: false
 
 theming:
-  primary: "435f6f "
+  primary: "435f6f"
   background: "f3f3f3"
   info: "21A1B3"
   warning: "FFC107"
@@ -69,6 +69,8 @@ theming:
   topbarfirstbuttonbackground: "4d6d7f"
   infolabel: "1d8e9d"
   hover: "527588"
+  d7d7d7: "d7d7d7"
+  f8b763: "f8b763"
 
 
 # Redis Config

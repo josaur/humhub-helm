@@ -14,3 +14,5 @@ data:
   topbarfirstbuttonbackground: {{ .Values.theming.topbarfirstbuttonbackground | quote }} 
   infolabel: {{ .Values.theming.infolabel | quote }} 
   hover: {{ .Values.theming.hover | quote }} 
+  d7d7d7: {{ .Values.theming.d7d7d7 | quote }}
+  f8b763: {{ .Values.theming.f8b763 | quote }}
