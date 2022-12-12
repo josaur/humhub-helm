@@ -156,7 +156,8 @@ spec:
                 name: theme
                 key: warning
           - name: DEFAULT
-            configMapKeyRef:
+            valueFrom:
+              configMapKeyRef:
                 name: theme
                 key: default
           - name: SUCESS
