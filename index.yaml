@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  common:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2022-12-21T23:01:21.55863128Z"
+    description: A Helm chart for any basic onecontainer-application
+    digest: c75c5c7386db509c6b4453b5279cc5e40d8166d434d0025739fa707ae7f2f16d
+    name: common
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/common-0.1.0/common-0.1.0.tgz
+    version: 0.1.0
   etherpad:
   - apiVersion: v2
     appVersion: 1.16.0
@@ -233,4 +244,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2022-12-20T22:53:08.650065226Z"
+generated: "2022-12-21T23:01:21.55865838Z"
