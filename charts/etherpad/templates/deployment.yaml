@@ -48,6 +48,11 @@ spec:
               secretKeyRef:
                 name: {{ printf "database-%s" .Release.Name }}
                 key: DB_PASS
+           - name: ADMIN_PASSWORD
+             valueFrom:
+              secretKeyRef:
+                name: {{ printf "database-%s" .Release.Name }}
+                key:  ADMIN_PASSWORD
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
