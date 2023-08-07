@@ -103,11 +103,15 @@ spec:
             value: {{ .Values.mailer.port | quote }}
           - name: HUMHUB_MAILER_USERNAME
             value: {{ .Values.mailer.username | quote }}
+          - name: HUMHUB_MAILER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "humhub.mailerSecretName" . }}
+                key: password
           - name: HUMHUB_MAILER_ENCRYPTION
             value: {{ .Values.mailer.encryption | quote }}
           - name: HUMHUB_MAILER_ALLOW_SELF_SIGNED_CERTS
             value: {{ .Values.mailer.allowSelfSignedCerts | quote }}
-
           - name: HUMHUB_LANG
             value: {{ .Values.humhubLanguage | quote }}
           - name: HUMHUB_DEBUG
