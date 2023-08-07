@@ -85,7 +85,7 @@ Return the humhub-database Secret Name
 {{- end -}}
 
 {{/*
-Return the humhub-database Secret Name
+Return the humhub-mailer Secret Name
 */}}
 {{- define "humhub.mailerSecretName" -}}
 {{- if .Values.mailer.existingSecret }}
