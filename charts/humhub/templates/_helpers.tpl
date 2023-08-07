@@ -83,6 +83,7 @@ Return the humhub-database Secret Name
     {{- printf "%s-database" (include "humhub.fullname" .) -}}
 {{- end -}}
 {{- end -}}
+
 {{/*
 Return the humhub-database Secret Name
 */}}
