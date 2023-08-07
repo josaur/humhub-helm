@@ -42,22 +42,26 @@ spec:
             containerPort: 80
             protocol: TCP        
         startupProbe:
-          httpGet:
-            path: /
-            port: http
-          failureThreshold: 30
-          periodSeconds: 10
-          timeoutSeconds: 3
+          tcpSocket:
+              port: http
+            timeoutSeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
         livenessProbe:
-          httpGet:
-            path: /
-            port: http
-          timeoutSeconds: 3
+          tcpSocket:
+              port: http
+            timeoutSeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
         readinessProbe:
-          httpGet:
-            path: /
-            port: http
-          timeoutSeconds: 3
+          tcpSocket:
+              port: http
+            timeoutSeconds: 3
+            periodSeconds: 10
+            successThreshold: 1
+            failureThreshold: 10
         env:
           - name: HUMHUB_ADMIN_LOGIN
             value: {{.Values.adminUsername}}
