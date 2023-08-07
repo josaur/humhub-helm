@@ -53,8 +53,10 @@ mailer:
   port: 25
   username: ""
   password: ""
+  existingSecret: ""
   encryption: false
   allowSelfSignedCerts: false
+
 
 theming:
   primary: "435f6f"

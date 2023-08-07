@@ -91,6 +91,28 @@ spec:
             value: {{ .Values.autoinstall | quote }}
           - name: HUMHUB_EMAIL
             value: {{ .Values.humhubEmail | quote }}
+          - name: HUMHUB_MAILER_SYSTEM_EMAIL_ADDRESS
+            value: {{ .Values.mailer.systemEmailAdress | quote }}
+          - name: HUMHUB_MAILER_SYSTEM_EMAIL_NAME
+            value: {{ .Values.mailer.systemEmailName | quote }}
+          - name: HUMHUB_MAILER_TRANSPORT_TYPE
+            value: {{ .Values.mailer.transportType | quote }}
+          - name: HUMHUB_MAILER_HOSTNAME
+            value: {{ .Values.mailer.hostname | quote }}
+          - name: HUMHUB_MAILER_PORT
+            value: {{ .Values.mailer.port | quote }}
+          - name: HUMHUB_MAILER_USERNAME
+            value: {{ .Values.mailer.username | quote }}
+          - name: HUMHUB_MAILER_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: {{ include "humhub.mailerSecretName" . }}
+                key: SMTP
+          - name: HUMHUB_MAILER_ENCRYPTION
+            value: {{ .Values.mailer.encryption | quote }}
+          - name: HUMHUB_MAILER_ALLOW_SELF_SIGNED_CERTS
+            value: {{ .Values.mailer.allowSelfSignedCerts | quote }}
+
           - name: HUMHUB_LANG
             value: {{ .Values.humhubLanguage | quote }}
           - name: HUMHUB_DEBUG

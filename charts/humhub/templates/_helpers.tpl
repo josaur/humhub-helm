@@ -83,6 +83,16 @@ Return the humhub-database Secret Name
     {{- printf "%s-database" (include "humhub.fullname" .) -}}
 {{- end -}}
 {{- end -}}
+{{/*
+Return the humhub-database Secret Name
+*/}}
+{{- define "humhub.mailerSecretName" -}}
+{{- if .Values.mailer.existingSecret }}
+    {{- printf "%s" .Values.mailer.existingSecret -}}
+{{- else -}}
+    {{- printf "%s-mailer" (include "humhub.fullname" .) -}}
+{{- end -}}
+{{- end -}}
 
 {{/*
 Return the path to redis
