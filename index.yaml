@@ -308,6 +308,17 @@ entries:
     urls:
     - humhub-0.1.0.tgz
     version: 0.1.0
+  limesurvey:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2023-11-29T21:04:54.645412073Z"
+    description: A Helm chart for limesurvey
+    digest: 8d3c502518a5fadf459cbc71220708265acd607a132221c8a1ec06518ce8f860
+    name: limesurvey
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/limesurvey-1.0.0/limesurvey-1.0.0.tgz
+    version: 1.0.0
   redis:
   - annotations:
       category: Database
@@ -339,4 +350,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2023-08-07T21:26:42.143716337Z"
+generated: "2023-11-29T21:04:54.64549078Z"
