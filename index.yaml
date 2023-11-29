@@ -311,6 +311,16 @@ entries:
   limesurvey:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2023-11-29T21:08:11.44148269Z"
+    description: A Helm chart for limesurvey
+    digest: 535b77f6f9f43ed48ada368897ceed1883566af82d38bd40f6dd7061850dcb19
+    name: limesurvey
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/limesurvey-1.0.1/limesurvey-1.0.1.tgz
+    version: 1.0.1
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2023-11-29T21:04:54.645412073Z"
     description: A Helm chart for limesurvey
     digest: 8d3c502518a5fadf459cbc71220708265acd607a132221c8a1ec06518ce8f860
@@ -350,4 +360,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2023-11-29T21:04:54.64549078Z"
+generated: "2023-11-29T21:08:11.441541641Z"
