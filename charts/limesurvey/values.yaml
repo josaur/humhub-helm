@@ -15,17 +15,26 @@ nameOverride: ""
 fullnameOverride: ""
 
 env:
+  ADMIN_NAME: admin
+  ADMIN_USER: admin
+  DB_HOST: postgres
+  DB_NAME: limesurvey
+  DB_PORT: "5432"
+  DB_TYPE: pgsql
+  DB_USERNAME: limesurvey
+  USER: limesurvey
   
-
-
 secrets:
+  ADMIN_PASSWORD: admin
+  DB_PASSWORD: admin
   
 persistence:
+  enabled: false
   uploads:
     size: 1Gi
     accessMode: ReadWriteOnce
     storageClass: ""
-    
+
 serviceAccount:
   # Specifies whether a service account should be created
   create: true
