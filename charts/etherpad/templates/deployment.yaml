@@ -38,7 +38,7 @@ spec:
                 command:
                   - /bin/sh
                   - -c
-                  - cp /opt/etherpad-lite/secret/APIKEY.txt /opt/etherpad-lite/APIKEY.txt
+                  - cat <<< "$APIKEY" > /opt/etherpad-lite/APIKEY.txt
           envFrom:
            - configMapRef:
                name: etherpad-env
