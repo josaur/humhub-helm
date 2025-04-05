@@ -37,8 +37,8 @@ spec:
               exec:
                 command:
                   - /bin/sh
-                  - -c
-                  - cat <<< "$APIKEY" > /opt/etherpad-lite/APIKEY.txt
+                  - '-c'
+                  - printf "%s" "$APIKEY" > "/opt/etherpad-lite/APIKEY.txt"
           envFrom:
            - configMapRef:
                name: etherpad-env
@@ -53,6 +53,11 @@ spec:
               secretKeyRef:
                 name: {{ printf "database-%s" .Release.Name }}
                 key:  ADMIN_PASSWORD
+           - name: APIKEY
+             valueFrom:
+              secretKeyRef:
+                name: {{ printf "database-%s" .Release.Name }}
+                key: APIKEY
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
