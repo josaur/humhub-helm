@@ -24,6 +24,16 @@ entries:
   etherpad:
   - apiVersion: v2
     appVersion: 1.16.0
+    created: "2025-04-05T14:29:06.250507278Z"
+    description: A Helm chart for etherpad
+    digest: c71440beb2ef0b8e2fd3c4d2f86230c29bee95eea6415006ca0b0d7be441d999
+    name: etherpad
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/etherpad-0.1.5/etherpad-0.1.5.tgz
+    version: 0.1.5
+  - apiVersion: v2
+    appVersion: 1.16.0
     created: "2025-04-05T14:18:07.991897204Z"
     description: A Helm chart for etherpad
     digest: fe060ca2adf83ccf464cd338e1db01427fc5da8bee3eac9d95ef00f2619c483b
@@ -390,4 +400,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2025-04-05T14:18:07.99197555Z"
+generated: "2025-04-05T14:29:06.250589091Z"
