@@ -1,6 +1,27 @@
 apiVersion: v1
 entries:
+  civicrm:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-04-06T14:17:21.224868258Z"
+    description: A Helm chart to deploy CiviCRM Stanalone
+    digest: 0d48a1855147f0d9b8a09f5fb485f1faeeba3d6894a45b55bcf48a612bd6e8bc
+    name: civicrm
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/civicrm-0.1.0/civicrm-0.1.0.tgz
+    version: 0.1.0
   common:
+  - apiVersion: v2
+    appVersion: 1.16.0
+    created: "2025-04-06T14:17:21.330906437Z"
+    description: A Helm chart for any basic onecontainer-application
+    digest: 6315dd32d234565d1758246da6a166bca7a016d94c784a20118261558774ff09
+    name: common
+    type: application
+    urls:
+    - https://github.com/josaur/humhub-helm/releases/download/common-0.1.2/common-0.1.2.tgz
+    version: 0.1.2
   - apiVersion: v2
     appVersion: 1.16.0
     created: "2023-01-18T12:24:47.827201087Z"
@@ -400,4 +421,4 @@ entries:
     urls:
     - redis-17.3.11.tgz
     version: 17.3.11
-generated: "2025-04-05T14:29:06.250589091Z"
+generated: "2025-04-06T14:17:21.330999131Z"
