@@ -32,32 +32,20 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          lifecycle:
-            postStart:
-              exec:
-                command:
-                  - /bin/sh
-                  - '-c'
-                  - printf "%s" "$APIKEY" > "/opt/etherpad-lite/APIKEY.txt"
           envFrom:
-           - configMapRef:
-               name: etherpad-env
+            - configMapRef:
+                name: etherpad-env
           env:
-           - name: DB_PASS
-             valueFrom:
-              secretKeyRef:
-                name: {{ printf "database-%s" .Release.Name }}
-                key: DB_PASS
-           - name: ADMIN_PASSWORD
-             valueFrom:
-              secretKeyRef:
-                name: {{ printf "database-%s" .Release.Name }}
-                key:  ADMIN_PASSWORD
-           - name: APIKEY
-             valueFrom:
-              secretKeyRef:
-                name: {{ printf "database-%s" .Release.Name }}
-                key: APIKEY
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "database-%s" .Release.Name }}
+                  key: DB_PASS
+            - name: ADMIN_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ printf "database-%s" .Release.Name }}
+                  key: ADMIN_PASSWORD
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}
@@ -71,8 +59,10 @@ spec:
               path: /
               port: {{ .Values.service.port }}
           volumeMounts:
-            - mountPath: "/opt/etherpad-lite/secret"
+            - mountPath: "/opt/etherpad-lite/APIKEY.txt"
               name: apikey
+              subPath: APIKEY.txt
+              readOnly: true
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       volumes:
